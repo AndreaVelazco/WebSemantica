@@ -8,34 +8,21 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Set;
 
-/**
- * DTO para representar un producto del catálogo
- */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductoDTO {
-    
     private String id;
     private String nombre;
-    private String tipo; // Smartphone, Laptop, Accesorio, etc.
+    private String tipo;
     private String marca;
+    private String categoria;
     private Double precio;
     private Integer stock;
-    private String categoria;
-    
-    // Características técnicas
+    private String descripcion;
     private List<String> caracteristicas;
-    
-    // Productos compatibles (inferidos por el razonador)
     private Set<String> productosCompatibles;
-    
-    // Productos incompatibles (inferidos por el razonador)
     private Set<String> productosIncompatibles;
-    
-    // Indica si el producto está en stock
-    public boolean isDisponible() {
-        return stock != null && stock > 0;
-    }
+    private boolean disponible;  // ← AGREGAR ESTE CAMPO
 }

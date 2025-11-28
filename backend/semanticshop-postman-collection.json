@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "semanticshop-collection",
+		"name": "SemanticShop API - Con Autenticación",
+		"description": "Colección completa de endpoints para SemanticShop con JWT Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "jwt_token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "🔐 Autenticación",
+			"item": [
+				{
+					"name": "1. Inicializar Usuarios de Prueba",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/init-users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "init-users"]
+						},
+						"description": "Crea automáticamente 6 usuarios de prueba vinculados a la ontología"
+					},
+					"response": []
+				},
+				{
+					"name": "2. Register (Registrar Usuario)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@email.com\",\n  \"password\": \"password123\",\n  \"nombreCompleto\": \"Usuario de Prueba\",\n  \"ontologyClienteId\": \"ClienteJuan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "register"]
+						},
+						"description": "Registra un nuevo usuario y retorna JWT token"
+					},
+					"response": []
+				},
+				{
+					"name": "3. Login (Juan)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Guardar el token automáticamente",
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"jwt_token\", jsonData.token);",
+									"    console.log(\"Token guardado: \" + jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"juan\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Login como Juan. El token se guarda automáticamente."
+					},
+					"response": []
+				},
+				{
+					"name": "4. Login (Maria)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"jwt_token\", jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"maria\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Get Current User (Me)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/me",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "me"]
+						},
+						"description": "Obtiene información del usuario autenticado (requiere token)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🛍️ Productos",
+			"item": [
+				{
+					"name": "1. Listar Todos los Productos",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos"]
+						},
+						"description": "Obtiene todos los productos de la ontología"
+					},
+					"response": []
+				},
+				{
+					"name": "2. Obtener Producto por ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos/iPhone15",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos", "iPhone15"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Productos por Categoría",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos/categoria/Smartphone",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos", "categoria", "Smartphone"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Buscar Productos",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos/buscar?query=Apple",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos", "buscar"],
+							"query": [
+								{
+									"key": "query",
+									"value": "Apple"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Productos Compatibles (HermiT)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos/iPhone15/compatibles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos", "iPhone15", "compatibles"]
+						},
+						"description": "Productos compatibles inferidos por el razonador HermiT"
+					},
+					"response": []
+				},
+				{
+					"name": "6. Productos Incompatibles (HermiT)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos/iPhone15/incompatibles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos", "iPhone15", "incompatibles"]
+						},
+						"description": "Productos incompatibles inferidos por HermiT"
+					},
+					"response": []
+				},
+				{
+					"name": "7. Verificar Compatibilidad",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/productos/compatibilidad?producto1=iPhone15&producto2=CableUSBC",
+							"host": ["{{base_url}}"],
+							"path": ["api", "productos", "compatibilidad"],
+							"query": [
+								{
+									"key": "producto1",
+									"value": "iPhone15"
+								},
+								{
+									"key": "producto2",
+									"value": "CableUSBC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🎯 Recomendaciones",
+			"item": [
+				{
+					"name": "1. Mis Recomendaciones (Usuario Autenticado)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recomendaciones/me",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recomendaciones", "me"]
+						},
+						"description": "Recomendaciones personalizadas para el usuario logueado (requiere JWT)"
+					},
+					"response": []
+				},
+				{
+					"name": "2. Recomendaciones para Cliente Específico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recomendaciones/cliente/ClienteJuan",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recomendaciones", "cliente", "ClienteJuan"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Listar Todos los Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recomendaciones/clientes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recomendaciones", "clientes"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Info de Cliente Específico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recomendaciones/clientes/ClienteMaria",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recomendaciones", "clientes", "ClienteMaria"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Accesorios Compatibles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recomendaciones/accesorios/MacBookPro",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recomendaciones", "accesorios", "MacBookPro"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Recomendaciones por Historial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recomendaciones/historial/ClienteJuan",
+							"host": ["{{base_url}}"],
+							"path": ["api", "recomendaciones", "historial", "ClienteJuan"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "📊 Análisis (SPARQL)",
+			"item": [
+				{
+					"name": "1. Ventas por Categoría",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/ventas/categoria",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "ventas", "categoria"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Productos Más Vendidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/productos/mas-vendidos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "productos", "mas-vendidos"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Clientes Premium (Inferidos)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/clientes/premium",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "clientes", "premium"]
+						},
+						"description": "Clientes clasificados como Premium por HermiT (>=5 pedidos)"
+					},
+					"response": []
+				},
+				{
+					"name": "4. Productos por Rango de Precio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/productos/rango-precio?precioMin=500&precioMax=1500",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "productos", "rango-precio"],
+							"query": [
+								{
+									"key": "precioMin",
+									"value": "500"
+								},
+								{
+									"key": "precioMax",
+									"value": "1500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Productos con Bajo Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/productos/bajo-stock?stockMinimo=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "productos", "bajo-stock"],
+							"query": [
+								{
+									"key": "stockMinimo",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Marcas Populares",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/marcas/populares",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "marcas", "populares"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Pedidos por Estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/analisis/pedidos/por-estado",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "pedidos", "por-estado"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Ejecutar Consulta SPARQL Personalizada",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\nSELECT ?producto ?precio\\nWHERE {\\n  ?prod a :Producto .\\n  ?prod :nombre ?producto .\\n  ?prod :precio ?precio .\\n  FILTER(?precio > 1000)\\n}\\nORDER BY DESC(?precio)\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/analisis/sparql",
+							"host": ["{{base_url}}"],
+							"path": ["api", "analisis", "sparql"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🧠 Ontología",
+			"item": [
+				{
+					"name": "1. Verificar Consistencia (HermiT)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/ontology/consistencia",
+							"host": ["{{base_url}}"],
+							"path": ["api", "ontology", "consistencia"]
+						},
+						"description": "Verifica si la ontología es consistente usando HermiT"
+					},
+					"response": []
+				},
+				{
+					"name": "2. Estadísticas de la Ontología",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/ontology/estadisticas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "ontology", "estadisticas"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Listar Todas las Clases",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/ontology/clases",
+							"host": ["{{base_url}}"],
+							"path": ["api", "ontology", "clases"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Individuos de una Clase",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/ontology/individuos/Smartphone",
+							"host": ["{{base_url}}"],
+							"path": ["api", "ontology", "individuos", "Smartphone"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Info del Sistema",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/ontology/info",
+							"host": ["{{base_url}}"],
+							"path": ["api", "ontology", "info"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

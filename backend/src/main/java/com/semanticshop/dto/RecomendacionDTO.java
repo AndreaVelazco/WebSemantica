@@ -7,18 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * DTO para respuestas de recomendaciones
- */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecomendacionDTO {
-    
     private String clienteId;
     private String clienteNombre;
-    private List<ProductoDTO> productosRecomendados;
-    private String razonRecomendacion;
-    private Integer totalRecomendaciones;
+    private List<ProductoDTO> productos;  // ← Este campo
+    private String razon;
+    private String razonRecomendacion;    // ← AGREGAR ESTE
+    private int totalRecomendaciones;      // ← AGREGAR ESTE
 }

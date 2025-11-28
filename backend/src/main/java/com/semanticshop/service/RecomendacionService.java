@@ -39,11 +39,15 @@ public class RecomendacionService {
         Set<OWLNamedIndividual> productosRecomendados = ontologyService
                 .getObjectPropertyValues(clienteId, "productoRecomendado");
         
+        // Convertir OWLNamedIndividual a ProductoDTO
         List<ProductoDTO> recomendaciones = productosRecomendados.stream()
                 .map(ind -> productoService.getProductoById(getShortName(ind)))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .filter(ProductoDTO::isDisponible) // Solo productos en stock
+                .filter(p -> {
+                    // Solo productos disponibles (con stock > 0)
+                    return p.getStock() != null && p.getStock() > 0;
+                })
                 .collect(Collectors.toList());
         
         String razon = construirRazonRecomendacion(cliente);
@@ -51,7 +55,7 @@ public class RecomendacionService {
         return RecomendacionDTO.builder()
                 .clienteId(clienteId)
                 .clienteNombre(cliente.getNombre())
-                .productosRecomendados(recomendaciones)
+                .productos(recomendaciones)  // ← Ya convertido a List<ProductoDTO>
                 .razonRecomendacion(razon)
                 .totalRecomendaciones(recomendaciones.size())
                 .build();
@@ -91,7 +95,7 @@ public class RecomendacionService {
         // Filtrar solo los compatibles con el producto
         return accesorios.stream()
                 .filter(accesorio -> productoService.sonCompatibles(productoId, accesorio.getId()))
-                .filter(ProductoDTO::isDisponible)
+                .filter(p -> p.getStock() != null && p.getStock() > 0)  // ← CORREGIDO
                 .collect(Collectors.toList());
     }
 
@@ -129,7 +133,6 @@ public class RecomendacionService {
         ClienteDTO dto = ClienteDTO.builder()
                 .id(id)
                 .nombre(getStringProperty(individual, "nombre").orElse(id))
-                .email(getStringProperty(individual, "email").orElse(""))
                 .build();
         
         // Determinar tipo de cliente (inferido por HermiT)
