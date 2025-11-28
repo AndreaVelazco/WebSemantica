@@ -1,8 +1,8 @@
 package com.semanticshop.service;
 
 import com.semanticshop.dto.AuthResponse;
-import com.semanticshop.dto.LoginRequest;
 import com.semanticshop.dto.RegistroRequest;
+import com.semanticshop.dto.LoginRequest;
 import com.semanticshop.dto.UsuarioDTO;
 import com.semanticshop.model.Role;
 import com.semanticshop.model.Usuario;
@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,29 +23,28 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
-    
+
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
-    private final OntologyService ontologyService;
-    
+    private final OntologySyncService ontologySyncService;  // ← NUEVO
+
     @Transactional
     public AuthResponse registro(RegistroRequest request) {
+        log.info("Intentando registrar usuario: {}", request.getUsername());
+
         // Validar que el username no exista
-        if (usuarioRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("El nombre de usuario ya existe");
+        if (usuarioRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new RuntimeException("El nombre de usuario ya está en uso");
         }
-        
+
         // Validar que el email no exista
-        if (usuarioRepository.existsByEmail(request.getEmail())) {
+        if (usuarioRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new RuntimeException("El email ya está registrado");
         }
-        
-        // Crear cliente en la ontología
-        String clienteIdOntologia = crearClienteEnOntologia(request);
-        
-        // Crear usuario en base de datos
+
+        // Crear el usuario
         Usuario usuario = Usuario.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -53,20 +53,29 @@ public class AuthService {
                 .telefono(request.getTelefono())
                 .direccion(request.getDireccion())
                 .role(Role.USER)
-                .clienteIdOntologia(clienteIdOntologia)
+                .clienteIdOntologia("Cliente_" + request.getUsername())
                 .marcaPreferida(request.getMarcaPreferida())
                 .sistemaOperativoPreferido(request.getSistemaOperativoPreferido())
                 .rangoPrecioMin(request.getRangoPrecioMin())
                 .rangoPrecioMax(request.getRangoPrecioMax())
                 .build();
-        
+
+        // Guardar en BD
         usuario = usuarioRepository.save(usuario);
-        
-        // Generar token JWT
+        log.info("✅ Usuario guardado en BD con ID: {}", usuario.getId());
+
+        // 🔥 SINCRONIZAR CON ONTOLOGÍA
+        try {
+            ontologySyncService.sincronizarUsuarioConOntologia(usuario);
+            log.info("✅ Usuario sincronizado con ontología: {}", usuario.getClienteIdOntologia());
+        } catch (Exception e) {
+            log.error("❌ Error al sincronizar con ontología: {}", e.getMessage());
+            // Continuar aunque falle la sincronización
+        }
+
+        // Generar token
         String token = jwtUtil.generateToken(usuario);
-        
-        log.info("Usuario registrado exitosamente: {}", usuario.getUsername());
-        
+
         return AuthResponse.builder()
                 .token(token)
                 .id(usuario.getId())
@@ -77,25 +86,37 @@ public class AuthService {
                 .clienteIdOntologia(usuario.getClienteIdOntologia())
                 .build();
     }
-    
+
     public AuthResponse login(LoginRequest request) {
-        // Autenticar usuario
-        authenticationManager.authenticate(
+        log.info("Intento de login para usuario: {}", request.getUsername());
+
+        // Autenticar
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
                         request.getPassword()
                 )
         );
-        
+
         // Obtener usuario
         Usuario usuario = usuarioRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        
-        // Generar token JWT
+
+        // 🔥 VERIFICAR Y SINCRONIZAR SI NO EXISTE EN ONTOLOGÍA
+        if (!ontologySyncService.clienteExisteEnOntologia(usuario.getClienteIdOntologia())) {
+            log.info("Cliente no existe en ontología. Sincronizando...");
+            try {
+                ontologySyncService.sincronizarUsuarioConOntologia(usuario);
+                log.info("✅ Usuario sincronizado con ontología en login");
+            } catch (Exception e) {
+                log.error("❌ Error al sincronizar en login: {}", e.getMessage());
+            }
+        }
+
+        // Generar token
         String token = jwtUtil.generateToken(usuario);
-        
-        log.info("Usuario autenticado exitosamente: {}", usuario.getUsername());
-        
+        log.info("✅ Login exitoso para usuario: {}", usuario.getUsername());
+
         return AuthResponse.builder()
                 .token(token)
                 .id(usuario.getId())
@@ -106,33 +127,33 @@ public class AuthService {
                 .clienteIdOntologia(usuario.getClienteIdOntologia())
                 .build();
     }
-    
+
     public UsuarioDTO obtenerUsuarioActual() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        
+
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        
-        return convertirADTO(usuario);
+
+        return convertirAUsuarioDTO(usuario);
     }
-    
+
     @Transactional
     public UsuarioDTO actualizarPerfil(UsuarioDTO usuarioDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        
+
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        
-        // Actualizar campos
+
+        // Actualizar solo los campos permitidos
         if (usuarioDTO.getEmail() != null && !usuarioDTO.getEmail().equals(usuario.getEmail())) {
-            if (usuarioRepository.existsByEmail(usuarioDTO.getEmail())) {
+            if (usuarioRepository.findByEmail(usuarioDTO.getEmail()).isPresent()) {
                 throw new RuntimeException("El email ya está en uso");
             }
             usuario.setEmail(usuarioDTO.getEmail());
         }
-        
+
         if (usuarioDTO.getNombreCompleto() != null) {
             usuario.setNombreCompleto(usuarioDTO.getNombreCompleto());
         }
@@ -142,51 +163,36 @@ public class AuthService {
         if (usuarioDTO.getDireccion() != null) {
             usuario.setDireccion(usuarioDTO.getDireccion());
         }
-        
+
         // Actualizar preferencias
-        usuario.setMarcaPreferida(usuarioDTO.getMarcaPreferida());
-        usuario.setSistemaOperativoPreferido(usuarioDTO.getSistemaOperativoPreferido());
-        usuario.setRangoPrecioMin(usuarioDTO.getRangoPrecioMin());
-        usuario.setRangoPrecioMax(usuarioDTO.getRangoPrecioMax());
-        
+        if (usuarioDTO.getMarcaPreferida() != null) {
+            usuario.setMarcaPreferida(usuarioDTO.getMarcaPreferida());
+        }
+        if (usuarioDTO.getSistemaOperativoPreferido() != null) {
+            usuario.setSistemaOperativoPreferido(usuarioDTO.getSistemaOperativoPreferido());
+        }
+        if (usuarioDTO.getRangoPrecioMin() != null) {
+            usuario.setRangoPrecioMin(usuarioDTO.getRangoPrecioMin());
+        }
+        if (usuarioDTO.getRangoPrecioMax() != null) {
+            usuario.setRangoPrecioMax(usuarioDTO.getRangoPrecioMax());
+        }
+
         usuario = usuarioRepository.save(usuario);
-        
-        // Actualizar preferencias en ontología
-        actualizarPreferenciasEnOntologia(usuario);
-        
-        log.info("Perfil actualizado para usuario: {}", usuario.getUsername());
-        
-        return convertirADTO(usuario);
-    }
-    
-    private String crearClienteEnOntologia(RegistroRequest request) {
+        log.info("✅ Perfil actualizado para usuario: {}", username);
+
+        // 🔥 RE-SINCRONIZAR CON ONTOLOGÍA
         try {
-            // Crear un ID único para el cliente en la ontología
-            String clienteId = "Cliente_" + request.getUsername().replaceAll("[^a-zA-Z0-9]", "");
-            
-            // Aquí se crearía el cliente en la ontología OWL
-            // Por ahora retornamos el ID generado
-            log.info("Cliente creado en ontología: {}", clienteId);
-            
-            return clienteId;
+            ontologySyncService.sincronizarUsuarioConOntologia(usuario);
+            log.info("✅ Preferencias actualizadas en ontología");
         } catch (Exception e) {
-            log.error("Error al crear cliente en ontología: {}", e.getMessage());
-            return "Cliente_" + request.getUsername().replaceAll("[^a-zA-Z0-9]", "");
+            log.error("❌ Error al actualizar ontología: {}", e.getMessage());
         }
+
+        return convertirAUsuarioDTO(usuario);
     }
-    
-    private void actualizarPreferenciasEnOntologia(Usuario usuario) {
-        try {
-            if (usuario.getClienteIdOntologia() != null) {
-                // Aquí se actualizarían las preferencias en la ontología
-                log.info("Preferencias actualizadas en ontología para: {}", usuario.getClienteIdOntologia());
-            }
-        } catch (Exception e) {
-            log.error("Error al actualizar preferencias en ontología: {}", e.getMessage());
-        }
-    }
-    
-    private UsuarioDTO convertirADTO(Usuario usuario) {
+
+    private UsuarioDTO convertirAUsuarioDTO(Usuario usuario) {
         return UsuarioDTO.builder()
                 .id(usuario.getId())
                 .username(usuario.getUsername())

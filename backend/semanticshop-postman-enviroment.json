@@ -1,0 +1,49 @@
+{
+	"id": "semanticshop-local-env",
+	"name": "SemanticShop - Local",
+	"values": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token_apple_fan",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "token_samsung_lover",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "token_budget",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment"
+}

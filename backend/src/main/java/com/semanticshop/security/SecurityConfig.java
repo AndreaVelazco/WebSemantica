@@ -43,16 +43,24 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/productos/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers("/api/ontology/info", "/api/ontology/estadisticas").permitAll()
+                        
+                        // ✅ Ontología - PÚBLICOS para diagnóstico
+                        .requestMatchers("/api/ontology/info").permitAll()
+                        .requestMatchers("/api/ontology/estadisticas").permitAll()
+                        .requestMatchers("/api/ontology/consistencia").permitAll()
+                        .requestMatchers("/api/ontology/clases").permitAll()
+                        .requestMatchers("/api/ontology/individuos/**").permitAll()
                         
                         // Endpoints que requieren autenticación
+                        .requestMatchers("/api/ontology/sync").authenticated()
+                        .requestMatchers("/api/ontology/check").authenticated()
+                        .requestMatchers("/api/ontology/sync/status").authenticated()
                         .requestMatchers("/api/recomendaciones/**").authenticated()
                         .requestMatchers("/api/carrito/**").authenticated()
                         .requestMatchers("/api/usuario/**").authenticated()
                         
                         // Endpoints de admin
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/ontology/consistencia", "/api/ontology/clases").hasAuthority("ADMIN")
                         
                         // Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated()

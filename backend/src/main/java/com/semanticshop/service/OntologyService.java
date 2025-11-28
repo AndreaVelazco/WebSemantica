@@ -85,6 +85,23 @@ public class OntologyService {
     }
 
     /**
+     * Ejecuta el razonador para precomputar inferencias
+     */
+    public void runReasoner() {
+        log.info("Ejecutando razonador HermiT...");
+        try {
+            reasoner.precomputeInferences(InferenceType.CLASS_HIERARCHY);
+            reasoner.precomputeInferences(InferenceType.OBJECT_PROPERTY_HIERARCHY);
+            reasoner.precomputeInferences(InferenceType.DATA_PROPERTY_HIERARCHY);
+            reasoner.flush();
+            log.info("✅ Razonador ejecutado exitosamente");
+        } catch (Exception e) {
+            log.error("❌ Error al ejecutar razonador: {}", e.getMessage());
+            throw new RuntimeException("Error al ejecutar razonador", e);
+        }
+    }
+
+    /**
      * Limpia recursos al cerrar la aplicación
      */
     @PreDestroy
@@ -171,5 +188,9 @@ public class OntologyService {
 
     public String getNamespace() {
         return namespace;
+    }
+    
+    public OWLOntologyManager getManager() {
+        return manager;
     }
 }
