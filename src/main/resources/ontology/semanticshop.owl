@@ -1,0 +1,1857 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticshop.com/ontology#"
+     xml:base="http://www.semanticshop.com/ontology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#">
+    <owl:Ontology rdf:about="http://www.semanticshop.com/ontology">
+        <rdfs:comment>Ontología para sistema de comercio electrónico de productos electrónicos</rdfs:comment>
+        <rdfs:label>SemanticShop Electronics Ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
+
+    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#contieneProducto -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#contieneProducto">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:label>contiene producto</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#esCompatibleCon -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#esCompatibleCon">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.semanticshop.com/ontology#esIncompatibleCon"/>
+        <rdfs:label>es compatible con</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#esIncompatibleCon -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#esIncompatibleCon">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:label>es incompatible con</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#fueRealizadoPor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#fueRealizadoPor">
+        <owl:inverseOf rdf:resource="http://www.semanticshop.com/ontology#realizoPedido"/>
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:comment>Indica qué cliente realizó el pedido</rdfs:comment>
+        <rdfs:label>fue realizado por</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#perteneceACategoria -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#perteneceACategoria">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Categoria"/>
+        <rdfs:label>pertenece a categoría</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#productoRecomendado -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#productoRecomendado">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#realizoPedido -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#realizoPedido">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:label>realizó pedido</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#tieneCaracteristica -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#tieneCaracteristica">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Caracteristica"/>
+        <rdfs:label>tiene característica</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#tieneMarca -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#tieneMarca">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:comment>Marca del fabricante del producto</rdfs:comment>
+        <rdfs:label>tiene marca</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#tieneMarcaPreferida -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#tieneMarcaPreferida">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:comment>Marca de preferencia del cliente</rdfs:comment>
+        <rdfs:label>tiene marca preferida</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#tienePreferencia -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#tienePreferencia">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Caracteristica"/>
+        <rdfs:label>tiene preferencia</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#tieneRangoPrecio -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#tieneRangoPrecio">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#RangoPrecio"/>
+        <rdfs:comment>Clasificación de precio del producto</rdfs:comment>
+        <rdfs:label>tiene rango de precio</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#cantidadProducto -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#cantidadProducto">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Número de unidades del producto en el pedido</rdfs:comment>
+        <rdfs:label>cantidad de producto</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#email -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#email">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>email</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#estadoPedido -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#estadoPedido">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Estado actual: Pendiente, Procesando, Enviado, Entregado, Cancelado</rdfs:comment>
+        <rdfs:label>estado del pedido</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#fechaPedido -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#fechaPedido">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Fecha y hora en que se realizó el pedido</rdfs:comment>
+        <rdfs:label>fecha del pedido</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#montoTotal -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#montoTotal">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>Monto total del pedido en dólares</rdfs:comment>
+        <rdfs:label>monto total</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#nombre -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#nombre">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Nombre del elemento (puede ser producto, cliente, marca o categoría)</rdfs:comment>
+        <rdfs:label>nombre</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#precio -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#precio">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:label>precio</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#stock -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#stock">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label>stock disponible</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#valor -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticshop.com/ontology#valor">
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Caracteristica"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>valor</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Accesorio -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Accesorio">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:label>Accesorio</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Audifonos -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Audifonos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+        <owl:disjointWith rdf:resource="http://www.semanticshop.com/ontology#Cable"/>
+        <owl:disjointWith rdf:resource="http://www.semanticshop.com/ontology#Cargador"/>
+        <owl:disjointWith rdf:resource="http://www.semanticshop.com/ontology#Monitor"/>
+        <owl:disjointWith rdf:resource="http://www.semanticshop.com/ontology#Mouse"/>
+        <owl:disjointWith rdf:resource="http://www.semanticshop.com/ontology#Teclado"/>
+        <rdfs:label>Audífonos</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Cable -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Cable">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+        <rdfs:label>Cable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Caracteristica -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Caracteristica">
+        <rdfs:comment>Característica técnica de un producto</rdfs:comment>
+        <rdfs:label>Característica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Cargador -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Cargador">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+        <rdfs:label>Cargador</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Categoria -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Categoria">
+        <rdfs:comment>Categoría de productos</rdfs:comment>
+        <rdfs:label>Categoría</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Cliente -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Cliente">
+        <rdfs:comment>Cliente de la tienda</rdfs:comment>
+        <rdfs:label>Cliente</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClienteNuevo -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#ClienteNuevo">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Cliente"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticshop.com/ontology#realizoPedido"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <owl:disjointWith rdf:resource="http://www.semanticshop.com/ontology#ClientePremium"/>
+        <rdfs:comment>Cliente sin historial de pedidos</rdfs:comment>
+        <rdfs:label>Cliente Nuevo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClientePremium -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#ClientePremium">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Cliente"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticshop.com/ontology#realizoPedido"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">5</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:comment>Clientes con 5 o más pedidos realizados</rdfs:comment>
+        <rdfs:label>Cliente Premium</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Computadora -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Computadora">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:label>Computadora</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Computadora_Escritorio -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Computadora_Escritorio">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Computadora"/>
+        <rdfs:label>Computadora de Escritorio</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Laptop -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Laptop">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Computadora"/>
+        <rdfs:label>Laptop</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#LaptopGamaAlta -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#LaptopGamaAlta">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#LaptopGamaBaja -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#LaptopGamaBaja">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdfs:comment>Laptops de precio económico</rdfs:comment>
+        <rdfs:label>Laptop Gama Baja</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#LaptopGamaMedia -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#LaptopGamaMedia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdfs:comment>Laptops de rango medio de precio</rdfs:comment>
+        <rdfs:label>Laptop Gama Media</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Marca -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Marca">
+        <rdfs:comment>Marca de fabricante de productos electrónicos</rdfs:comment>
+        <rdfs:label>Marca</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Monitor -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Monitor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+        <rdfs:comment>Monitor o pantalla externa</rdfs:comment>
+        <rdfs:label>Monitor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Mouse -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Mouse">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+        <rdfs:comment>Mouse o ratón de computadora</rdfs:comment>
+        <rdfs:label>Mouse</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Pedido">
+        <rdfs:comment>Pedido realizado por un cliente</rdfs:comment>
+        <rdfs:label>Pedido</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Producto -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Producto">
+        <rdfs:comment>Cualquier producto disponible en la tienda</rdfs:comment>
+        <rdfs:label>Producto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#RangoPrecio -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#RangoPrecio">
+        <rdfs:comment>Clasificación de productos por rango de precio</rdfs:comment>
+        <rdfs:label>Rango de Precio</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#SistemaOperativo -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#SistemaOperativo">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Caracteristica"/>
+        <rdfs:label>Sistema Operativo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Smartphone -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Smartphone">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:label>Smartphone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Tablet -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Tablet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:comment>Dispositivo tablet</rdfs:comment>
+        <rdfs:label>Tablet</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Teclado -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Teclado">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+        <rdfs:comment>Teclado de computadora</rdfs:comment>
+        <rdfs:label>Teclado</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#TipoConector -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#TipoConector">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Caracteristica"/>
+        <rdfs:label>Tipo de Conector</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Voltaje -->
+
+    <owl:Class rdf:about="http://www.semanticshop.com/ontology#Voltaje">
+        <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Caracteristica"/>
+        <rdfs:label>Voltaje</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#AirPodsPro -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#AirPodsPro">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Audifonos"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaAccesorios"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>AirPods Pro</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">249.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Android -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Android">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+        <valor>Android 14</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Apple -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Apple">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Apple</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CableLightning -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CableLightning">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cable"/>
+        <esIncompatibleCon rdf:resource="http://www.semanticshop.com/ontology#iPhone15"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaAccesorios"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Lightning"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Generico"/>
+        <nombre>Cable Lightning</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">15.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">50</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CableUSBC -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CableUSBC">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cable"/>
+        <esCompatibleCon rdf:resource="http://www.semanticshop.com/ontology#MacBookPro"/>
+        <esCompatibleCon rdf:resource="http://www.semanticshop.com/ontology#iPhone15"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaAccesorios"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Generico"/>
+        <nombre>Cable USB-C a USB-C</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">19.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CargadorLightning -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CargadorLightning">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cargador"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaAccesorios"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Lightning"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Generico"/>
+        <nombre>Cargador Lightning 20W</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">24.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">50</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CargadorUSBC -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CargadorUSBC">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cargador"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaAccesorios"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Generico"/>
+        <nombre>Cargador USB-C 30W</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">29.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">75</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CategoriaAccesorios -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CategoriaAccesorios">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Categoria"/>
+        <rdfs:label>Accesorios</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CategoriaLaptops -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CategoriaLaptops">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Categoria"/>
+        <rdfs:label>Laptops</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#CategoriaSmartphones -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#CategoriaSmartphones">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Categoria"/>
+        <rdfs:label>Smartphones</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClienteAna -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#ClienteAna">
+        <tieneMarcaPreferida rdf:resource="http://www.semanticshop.com/ontology#Google"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <email>ana@email.com</email>
+        <nombre>Ana Martinez</nombre>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClienteCarlos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#ClienteCarlos">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <tieneMarcaPreferida rdf:resource="http://www.semanticshop.com/ontology#Dell"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#Windows"/>
+        <email>carlos@email.com</email>
+        <nombre>Carlos Rodriguez</nombre>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClienteJuan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#ClienteJuan">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido001"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido002"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido003"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido004"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido005"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido016"/>
+        <tieneMarcaPreferida rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#iOS"/>
+        <email>juan@email.com</email>
+        <nombre>Juan Perez</nombre>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClienteLaura -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#ClienteLaura">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido012"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido013"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido014"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido015"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido017"/>
+        <tieneMarcaPreferida rdf:resource="http://www.semanticshop.com/ontology#Samsung"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <email>laura@email.com</email>
+        <nombre>Laura Gomez</nombre>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClienteMaria -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#ClienteMaria">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido006"/>
+        <tieneMarcaPreferida rdf:resource="http://www.semanticshop.com/ontology#Samsung"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <email>maria@email.com</email>
+        <nombre>Maria Gonzalez</nombre>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#ClientePedro -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#ClientePedro">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido010"/>
+        <realizoPedido rdf:resource="http://www.semanticshop.com/ontology#Pedido011"/>
+        <tieneMarcaPreferida rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <tienePreferencia rdf:resource="http://www.semanticshop.com/ontology#MacOS"/>
+        <email>pedro@email.com</email>
+        <nombre>Pedro Sanchez</nombre>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Dell -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Dell">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Dell</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#DellXPS15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#DellXPS15">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaLaptops"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Windows"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Dell"/>
+        <nombre>Dell XPS 15</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1799.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Generico -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Generico">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Genérico</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Google -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Google">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Google</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#GooglePixel8 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#GooglePixel8">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Smartphone"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaSmartphones"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Google"/>
+        <nombre>Google Pixel 8</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">699.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Lightning -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Lightning">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+        <valor>Lightning</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#MacBookPro -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#MacBookPro">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaLaptops"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#MacOS"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>MacBook Pro 14&quot; M3</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1999.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#MacOS -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#MacOS">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+        <valor>MacOS Sonoma</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido001">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CableUSBC"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#iPhone15"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-01-15T10:30:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1019.98</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido002 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido002">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#MacBookPro"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Enviado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-01-20T14:15:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1999.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido003 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido003">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#AirPodsPro"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-02-10T09:45:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">249.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido004 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido004">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CargadorUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-05T16:20:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">29.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido005 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido005">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CableUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Procesando</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-15T11:10:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">19.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido006 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido006">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#SamsungS24"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-02-28T13:30:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">899.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido007 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido007">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#DellXPS15"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-01-25T10:00:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1799.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido008 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido008">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CableUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-02-05T14:30:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">19.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido009 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido009">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CargadorUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Procesando</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-10T09:15:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">29.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido010 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido010">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#AirPodsPro"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#MacBookPro"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-02-20T11:45:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2249.98</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido011 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido011">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CableUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-01T16:20:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.98</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido012 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido012">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#SamsungS24"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-01-10T13:00:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">899.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido013 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido013">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CargadorUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-01-18T10:30:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">29.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido014 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido014">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#SonyWH1000XM5"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Entregado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-02-15T15:45:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">399.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido015 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido015">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#CableUSBC"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Enviado</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-08T12:10:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">19.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido016 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido016">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#iPhone14"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Procesando</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-20T10:00:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">799.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Pedido017 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Pedido017">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Pedido"/>
+        <contieneProducto rdf:resource="http://www.semanticshop.com/ontology#GooglePixel8"/>
+        <cantidadProducto rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cantidadProducto>
+        <estadoPedido>Pendiente</estadoPedido>
+        <fechaPedido rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-22T14:30:00</fechaPedido>
+        <montoTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">699.99</montoTotal>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Samsung -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Samsung">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Samsung</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#SamsungS24 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#SamsungS24">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Smartphone"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaSmartphones"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Samsung"/>
+        <nombre>Samsung Galaxy S24</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">899.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">30</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Sony -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Sony">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Sony</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#SonyWH1000XM5 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#SonyWH1000XM5">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Audifonos"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaAccesorios"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Sony"/>
+        <nombre>Sony WH-1000XM5</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">399.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#USBA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#USBA">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+        <valor>USB Type-A</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#USBC -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#USBC">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+        <valor>USB Type-C</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Windows -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Windows">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+        <valor>Windows 11</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#iOS -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#iOS">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+        <valor>iOS 17</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#iPhone14 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#iPhone14">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Smartphone"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaSmartphones"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Lightning"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#iOS"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>iPhone 14</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">799.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#iPhone15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#iPhone15">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Smartphone"/>
+        <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaSmartphones"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#iOS"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>iPhone 15 Pro</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">999.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Cable"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Cargador"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Monitor"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Mouse"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Teclado"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Cable"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Computadora"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Smartphone"/>
+            <rdf:Description rdf:about="http://www.semanticshop.com/ontology#Tablet"/>
+        </owl:members>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#p1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#p2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#so1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#so2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#c">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#cliente">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#producto">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#so">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#marca">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#c1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticshop.com/ontology#c2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment>Accesorios específicos de un SO son incompatibles con productos de otro SO.</rdfs:comment>
+        <rdfs:label>IncompatibilidadporSistemaOperativo</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Accesorio"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#so1"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#so2"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#so1"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#so2"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#so1"/>
+                                                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#so2"/>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#esIncompatibleCon"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment>Un producto principal es compatible con cables del mismo conector</rdfs:comment>
+        <rdfs:label>CompatibilidadProductoCable</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Cable"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#c"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#esCompatibleCon"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment>Un producto principal es compatible con cargadores del mismo conector</rdfs:comment>
+        <rdfs:label>CompatibilidadProductoCargador</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Cargador"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#c"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#esCompatibleCon"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment>Si un cliente tiene preferencia por un sistema operativo, recomendar productos con ese SO.</rdfs:comment>
+        <rdfs:label>RecomendaciónporSistemaOperativo</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#cliente"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#producto"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tienePreferencia"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#cliente"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#so"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#producto"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#so"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#so"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#productoRecomendado"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#cliente"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#producto"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment>Si un cliente tiene una marca preferida, recomendar productos de esa marca</rdfs:comment>
+        <rdfs:label>RecomendacionPorMarca</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#cliente"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#producto"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneMarcaPreferida"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#cliente"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#marca"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneMarca"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#producto"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#marca"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#productoRecomendado"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#cliente"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#producto"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment>Si dos productos tienen tipos de conectores diferentes, son incompatibles.</rdfs:comment>
+        <rdfs:label>IncompatibilidadPorConector</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c1"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#tieneCaracteristica"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c2"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#c1"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                                <swrl:classPredicate rdf:resource="http://www.semanticshop.com/ontology#TipoConector"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#c2"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#c1"/>
+                                                                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#c2"/>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                        <rdf:first>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                                                <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                                                                                <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                                                                            </rdf:Description>
+                                                                        </rdf:first>
+                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticshop.com/ontology#esIncompatibleCon"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticshop.com/ontology#p1"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticshop.com/ontology#p2"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
