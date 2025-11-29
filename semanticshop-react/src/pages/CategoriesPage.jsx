@@ -45,6 +45,7 @@ const CategoriesPage = () => {
       textColor: 'text-amber-600',
     },
     {
+      
       id: 5,
       name: 'Audífonos',
       description: 'Sonido de alta calidad para tus oídos',
