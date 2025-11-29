@@ -54,11 +54,11 @@ const ProductCard = ({ product }) => {
           />
         ) : (
           <div className="text-6xl">
-            {product.tipo === 'Smartphone' && '📱'}
-            {product.tipo === 'Laptop' && '💻'}
-            {product.tipo === 'Tablet' && '📟'}
-            {product.tipo === 'Accesorio' && '🎧'}
-            {!['Smartphone', 'Laptop', 'Tablet', 'Accesorio'].includes(product.tipo) && '📦'}
+            {product.tipo === 'Smartphone'}
+            {product.tipo === 'Laptop'}
+            {product.tipo === 'Tablet' }
+            {product.tipo === 'Accesorio'}
+            {!['Smartphone', 'Laptop', 'Tablet', 'Accesorio'].includes(product.tipo)}
           </div>
         )}
       </div>
@@ -108,7 +108,7 @@ const ProductCard = ({ product }) => {
           <div>
             {product.precio ? (
               <div className="text-2xl font-bold text-purple-600">
-                ${product.precio.toFixed(2)}
+                S/.{product.precio.toFixed(2)}
               </div>
             ) : (
               <div className="text-sm text-slate-500">Precio no disponible</div>

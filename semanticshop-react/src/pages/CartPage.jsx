@@ -109,11 +109,11 @@ const CartPage = () => {
                         <img src={item.imagen} alt={item.nombre} className="w-full h-full object-cover rounded-xl" />
                       ) : (
                         <span>
-                          {item.tipo === 'Smartphone' && '📱'}
-                          {item.tipo === 'Laptop' && '💻'}
-                          {item.tipo === 'Tablet' && '📟'}
-                          {item.tipo === 'Accesorio' && '🎧'}
-                          {!['Smartphone', 'Laptop', 'Tablet', 'Accesorio'].includes(item.tipo) && '📦'}
+                          {item.tipo === 'Smartphone'}
+                          {item.tipo === 'Laptop' }
+                          {item.tipo === 'Tablet'}
+                          {item.tipo === 'Accesorio'}
+                          {!['Smartphone', 'Laptop', 'Tablet', 'Accesorio'].includes(item.tipo)}
                         </span>
                       )}
                     </div>
@@ -166,10 +166,10 @@ const CartPage = () => {
                     {/* Price */}
                     <div className="text-right">
                       <div className="text-2xl font-bold text-purple-600">
-                        ${((item.precio || 0) * item.cantidad).toFixed(2)}
+                        S/.{((item.precio || 0) * item.cantidad).toFixed(2)}
                       </div>
                       <div className="text-sm text-slate-500">
-                        ${(item.precio || 0).toFixed(2)} c/u
+                        S/.{(item.precio || 0).toFixed(2)} c/u
                       </div>
                     </div>
 
@@ -210,7 +210,7 @@ const CartPage = () => {
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-slate-600">
                     <span>Subtotal</span>
-                    <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                    <span className="font-semibold">S/.{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-slate-600">
                     <span>Envío</span>
@@ -224,19 +224,19 @@ const CartPage = () => {
                   </div>
                   <div className="flex justify-between text-slate-600">
                     <span>IGV (18%)</span>
-                    <span className="font-semibold">${tax.toFixed(2)}</span>
+                    <span className="font-semibold">S/.{tax.toFixed(2)}</span>
                   </div>
                   
                   {discount > 0 && (
                     <div className="flex justify-between text-green-600">
                       <span>Descuento</span>
-                      <span className="font-semibold">-${discount.toFixed(2)}</span>
+                      <span className="font-semibold">-S/.{discount.toFixed(2)}</span>
                     </div>
                   )}
                   
                   {shipping > 0 && (
                     <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-sm text-blue-700">
-                      💡 Compra ${(1000 - subtotal).toFixed(2)} más para envío gratis
+                      💡 Compra S/.{(1000 - subtotal).toFixed(2)} más para envío gratis
                     </div>
                   )}
 
