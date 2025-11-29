@@ -14,8 +14,8 @@ public class SemanticShopApplication {
         SpringApplication.run(SemanticShopApplication.class, args);
         System.out.println("===========================================");
         System.out.println("  SemanticShop - Sistema Iniciado");
-        System.out.println("  Swagger UI: http://localhost:8080/swagger-ui.html");
-        System.out.println("  H2 Console: http://localhost:8080/h2-console");
+        System.out.println("  Swagger UI: http://localhost:8081/swagger-ui.html");
+        System.out.println("  H2 Console: http://localhost:8081/h2-console");
         System.out.println("===========================================");
     }
 }
