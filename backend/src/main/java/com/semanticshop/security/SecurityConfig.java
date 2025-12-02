@@ -61,6 +61,8 @@ public class SecurityConfig {
                         
                         // Endpoints de admin
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+
+                        .requestMatchers("/api/sparql/**").permitAll()  // SPARQL público para demo
                         
                         // Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated()

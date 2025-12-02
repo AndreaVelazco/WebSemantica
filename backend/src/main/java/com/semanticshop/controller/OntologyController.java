@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -97,7 +98,9 @@ public class OntologyController {
     public ResponseEntity<List<String>> getIndividualsOfClass(@PathVariable String clase) {
         log.info("GET /api/ontology/individuos/{}", clase);
         
-        List<String> individuos = ontologyService.getIndividualsOfClass(clase).stream()
+        // ✅ CORREGIDO: Convertir Set<OWLNamedIndividual> a List<String>
+        Set<OWLNamedIndividual> individuals = ontologyService.getIndividualsOfClass(clase);
+        List<String> individuos = individuals.stream()
                 .map(ind -> ind.getIRI().getShortForm())
                 .sorted()
                 .collect(Collectors.toList());
@@ -111,12 +114,12 @@ public class OntologyController {
     public ResponseEntity<Map<String, Object>> getSystemInfo() {
         log.info("GET /api/ontology/info");
         
-        Map<String, Object> info = new HashMap<>();
+        // ✅ MEJORADO: Usar método getOntologyInfo() del servicio
+        Map<String, Object> info = ontologyService.getOntologyInfo();
+        
+        // Agregar info adicional
         info.put("aplicacion", "SemanticShop");
         info.put("version", "1.0.0");
-        info.put("razonador", "HermiT 1.4.5");
-        info.put("framework", "OWL API 5.5.0 + Apache Jena 4.10.0");
-        info.put("consistente", ontologyService.isConsistent());
         info.put("timestamp", new Date());
         
         return ResponseEntity.ok(info);

@@ -1,0 +1,506 @@
+{
+  "info": {
+    "name": "SemanticShop - SPARQL Analytics",
+    "description": "Consultas SPARQL para análisis de ventas, productos y comportamiento de clientes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "📊 SPARQL - Información General",
+      "item": [
+        {
+          "name": "Info del Endpoint SPARQL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/info",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "info"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sincronizar Modelos OWL → Jena",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/sync",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "sync"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🛍️ SPARQL - Análisis de Productos",
+      "item": [
+        {
+          "name": "Todos los Productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/todos-productos",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "todos-productos"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Productos por Marca",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/productos-por-marca",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "productos-por-marca"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Productos por Categoría",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/productos-por-categoria",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "productos-por-categoria"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Productos por Rango de Precio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/productos-precio-rango?min=500&max=1500",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "productos-precio-rango"],
+              "query": [
+                {
+                  "key": "min",
+                  "value": "500",
+                  "description": "Precio mínimo"
+                },
+                {
+                  "key": "max",
+                  "value": "1500",
+                  "description": "Precio máximo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Smartphones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/smartphones",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "smartphones"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Laptops",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/laptops",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "laptops"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👥 SPARQL - Análisis de Clientes",
+      "item": [
+        {
+          "name": "Información de Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/clientes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "clientes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Preferencias de Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/preferencias-clientes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "preferencias-clientes"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📦 SPARQL - Análisis de Pedidos/Ventas",
+      "item": [
+        {
+          "name": "Todos los Pedidos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/pedidos",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "pedidos"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔗 SPARQL - Compatibilidad",
+      "item": [
+        {
+          "name": "Productos Compatibles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/compatibilidad",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "compatibilidad"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Productos Incompatibles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/incompatibilidad",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "incompatibilidad"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🎯 SPARQL - Recomendaciones",
+      "item": [
+        {
+          "name": "Recomendaciones Activas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/analytics/recomendaciones-activas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "analytics", "recomendaciones-activas"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔍 SPARQL - Consultas Personalizadas",
+      "item": [
+        {
+          "name": "Query: Productos más caros",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?producto ?nombre ?precio\\nWHERE {\\n  ?producto :nombre ?nombre .\\n  ?producto :precio ?precio .\\n}\\nORDER BY DESC(?precio)\\nLIMIT 10\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Clientes con más pedidos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?cliente ?nombre (COUNT(?pedido) as ?totalPedidos)\\nWHERE {\\n  ?cliente :nombre ?nombre .\\n  ?cliente :realizoPedido ?pedido .\\n}\\nGROUP BY ?cliente ?nombre\\nORDER BY DESC(?totalPedidos)\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Productos más vendidos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?producto (COUNT(?pedido) as ?vecesVendido)\\nWHERE {\\n  ?pedido :contieneProducto ?producto .\\n}\\nGROUP BY ?producto\\nORDER BY DESC(?vecesVendido)\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Ventas totales por marca",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?marca (SUM(?monto) as ?ventaTotal)\\nWHERE {\\n  ?pedido :contieneProducto ?producto .\\n  ?producto :tieneMarca ?marca .\\n  ?pedido :montoTotal ?monto .\\n}\\nGROUP BY ?marca\\nORDER BY DESC(?ventaTotal)\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Pedidos entregados",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?pedido ?producto ?estado ?monto\\nWHERE {\\n  ?pedido :estadoPedido ?estado .\\n  ?pedido :contieneProducto ?producto .\\n  ?pedido :montoTotal ?monto .\\n  FILTER (?estado = 'Entregado')\\n}\\nORDER BY DESC(?monto)\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Clientes Premium (inferido)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\n\\nSELECT ?cliente ?nombre (COUNT(?pedido) as ?totalPedidos)\\nWHERE {\\n  ?cliente rdf:type :ClientePremium .\\n  ?cliente :nombre ?nombre .\\n  ?cliente :realizoPedido ?pedido .\\n}\\nGROUP BY ?cliente ?nombre\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Productos Apple con iOS",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?producto ?nombre ?precio\\nWHERE {\\n  ?producto :tieneMarca :Apple .\\n  ?producto :tieneCaracteristica :iOS .\\n  ?producto :nombre ?nombre .\\n  ?producto :precio ?precio .\\n}\\nORDER BY ?precio\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Productos con stock bajo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?producto ?nombre ?stock ?precio\\nWHERE {\\n  ?producto :nombre ?nombre .\\n  ?producto :stock ?stock .\\n  ?producto :precio ?precio .\\n  FILTER (?stock < 15)\\n}\\nORDER BY ?stock\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Análisis de ventas por mes",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT (MONTH(?fecha) as ?mes) (COUNT(?pedido) as ?totalPedidos) (SUM(?monto) as ?ventaTotal)\\nWHERE {\\n  ?pedido :fechaPedido ?fecha .\\n  ?pedido :montoTotal ?monto .\\n}\\nGROUP BY (MONTH(?fecha))\\nORDER BY ?mes\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Query: Clientes por marca preferida",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"PREFIX : <http://www.semanticshop.com/ontology#>\\n\\nSELECT ?marca (COUNT(?cliente) as ?totalClientes)\\nWHERE {\\n  ?cliente :tieneMarcaPreferida ?marca .\\n}\\nGROUP BY ?marca\\nORDER BY DESC(?totalClientes)\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/sparql/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "sparql", "query"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

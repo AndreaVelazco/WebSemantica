@@ -77,6 +77,18 @@
     
 
 
+    <!-- http://www.semanticshop.com/ontology#esRecomendadoPara -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#esRecomendadoPara">
+        <owl:inverseOf rdf:resource="http://www.semanticshop.com/ontology#productoRecomendado"/>
+        <rdfs:domain rdf:resource="http://www.semanticshop.com/ontology#Producto"/>
+        <rdfs:range rdf:resource="http://www.semanticshop.com/ontology#Cliente"/>
+        <rdfs:comment>Indica que un producto es recomendado para un cliente específico</rdfs:comment>
+        <rdfs:label>es recomendado para</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticshop.com/ontology#fueRealizadoPor -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticshop.com/ontology#fueRealizadoPor">
@@ -431,6 +443,8 @@
 
     <owl:Class rdf:about="http://www.semanticshop.com/ontology#LaptopGamaAlta">
         <rdfs:subClassOf rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdfs:comment>Laptops de alta gama y precio premium</rdfs:comment>
+        <rdfs:label>Laptop Gama Alta</rdfs:label>
     </owl:Class>
     
 
@@ -795,6 +809,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#DellXPS15">
         <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#LaptopGamaAlta"/>
         <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaLaptops"/>
         <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
         <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Windows"/>
@@ -839,6 +854,39 @@
     
 
 
+    <!-- http://www.semanticshop.com/ontology#HP -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#HP">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>HP</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#HPPavilion15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#HPPavilion15">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#LaptopGamaBaja"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Windows"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#HP"/>
+        <nombre>HP Pavilion 15</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">599.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#Keychron -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Keychron">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Keychron</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticshop.com/ontology#Lightning -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Lightning">
@@ -848,10 +896,35 @@
     
 
 
+    <!-- http://www.semanticshop.com/ontology#Logitech -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#Logitech">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Marca"/>
+        <rdfs:label>Logitech</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#MacBookAir -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#MacBookAir">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#LaptopGamaMedia"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#MacOS"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>MacBook Air 13&quot; M2</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1199.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</stock>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticshop.com/ontology#MacBookPro -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#MacBookPro">
         <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Laptop"/>
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#LaptopGamaAlta"/>
         <perteneceACategoria rdf:resource="http://www.semanticshop.com/ontology#CategoriaLaptops"/>
         <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#MacOS"/>
         <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
@@ -1104,6 +1177,33 @@
     
 
 
+    <!-- http://www.semanticshop.com/ontology#SamsungMonitor27 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#SamsungMonitor27">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Monitor"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Samsung"/>
+        <nombre>Samsung Monitor 27&quot; 4K</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">349.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#SamsungS23 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#SamsungS23">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Smartphone"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Samsung"/>
+        <nombre>Samsung Galaxy S23</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">799.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">28</stock>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticshop.com/ontology#SamsungS24 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#SamsungS24">
@@ -1115,6 +1215,20 @@
         <nombre>Samsung Galaxy S24</nombre>
         <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">899.99</precio>
         <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">30</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#SamsungTabS9 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#SamsungTabS9">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Tablet"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Android"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Samsung"/>
+        <nombre>Samsung Galaxy Tab S9</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">799.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</stock>
     </owl:NamedIndividual>
     
 
@@ -1174,6 +1288,34 @@
     <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#iOS">
         <rdf:type rdf:resource="http://www.semanticshop.com/ontology#SistemaOperativo"/>
         <valor>iOS 17</valor>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#iPadPro -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#iPadPro">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Tablet"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#USBC"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#iOS"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>iPad Pro 12.9&quot;</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1099.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</stock>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticshop.com/ontology#iPhone13 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticshop.com/ontology#iPhone13">
+        <rdf:type rdf:resource="http://www.semanticshop.com/ontology#Smartphone"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#Lightning"/>
+        <tieneCaracteristica rdf:resource="http://www.semanticshop.com/ontology#iOS"/>
+        <tieneMarca rdf:resource="http://www.semanticshop.com/ontology#Apple"/>
+        <nombre>iPhone 13</nombre>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">699.99</precio>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">35</stock>
     </owl:NamedIndividual>
     
 
