@@ -1,0 +1,115 @@
+{
+	"name": "🆕 Recomendaciones Personalizadas NUEVAS",
+	"item": [
+		{
+			"name": "1. 🎯 Para Mí (Recomendado)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recomendaciones/para-mi",
+					"host": ["{{base_url}}"],
+					"path": ["api", "recomendaciones", "para-mi"]
+				},
+				"description": "✨ NUEVO - Recomendaciones personalizadas inteligentes\n\n✅ Usa token JWT automáticamente (no necesitas clienteId)\n✅ Combina Ontología + Base de Datos + Preferencias\n✅ Siempre devuelve algo (fallback inteligente)\n✅ Incluye info de preferencias del usuario\n\nMejor que el endpoint antiguo Cliente_{{username}}"
+			},
+			"response": []
+		},
+		{
+			"name": "2. 📊 Resumen Dashboard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recomendaciones/resumen",
+					"host": ["{{base_url}}"],
+					"path": ["api", "recomendaciones", "resumen"]
+				},
+				"description": "✨ NUEVO - Resumen rápido para dashboard\n\nDevuelve:\n✅ Top 3 productos recomendados\n✅ Categorías recomendadas\n✅ Marcas recomendadas\n✅ Rango de precios recomendados\n\nPerfecto para mostrar en la página principal"
+			},
+			"response": []
+		},
+		{
+			"name": "3. 🌐 Generales (Sin autenticación)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recomendaciones/general",
+					"host": ["{{base_url}}"],
+					"path": ["api", "recomendaciones", "general"]
+				},
+				"description": "✨ NUEVO - Recomendaciones generales sin autenticación\n\n✅ No requiere token JWT\n✅ Productos destacados del catálogo\n✅ Ideal para usuarios no logueados\n✅ Página de inicio/landing"
+			},
+			"response": []
+		},
+		{
+			"name": "4. 👤 Para Usuario Específico (Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recomendaciones/para-usuario/1",
+					"host": ["{{base_url}}"],
+					"path": ["api", "recomendaciones", "para-usuario", "1"]
+				},
+				"description": "✨ NUEVO - Ver recomendaciones de otro usuario\n\n✅ Por ID de usuario en Base de Datos (no clienteId)\n✅ Útil para panel de administración\n✅ Muestra preferencias del usuario\n\nCambiar el '1' por el ID del usuario que quieres consultar"
+			},
+			"response": []
+		},
+		{
+			"name": "5. 🔄 Refrescar Razonador",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/recomendaciones/refrescar",
+					"host": ["{{base_url}}"],
+					"path": ["api", "recomendaciones", "refrescar"]
+				},
+				"description": "✨ NUEVO - Ejecutar razonador HermiT\n\n✅ Actualiza las inferencias de la ontología\n✅ Recalcula todas las recomendaciones\n✅ Ejecuta reglas SWRL\n\nÚsalo después de:\n- Agregar nuevos productos\n- Cambiar preferencias de usuarios\n- Actualizar la ontología"
+			},
+			"response": []
+		}
+	]
+}

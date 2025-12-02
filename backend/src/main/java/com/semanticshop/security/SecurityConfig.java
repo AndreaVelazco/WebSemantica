@@ -42,6 +42,7 @@ public class SecurityConfig {
                         // Endpoints públicos
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/productos/**").permitAll()
+                        .requestMatchers("/api/sparql/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         
                         // ✅ Ontología - PÚBLICOS para diagnóstico
@@ -61,8 +62,6 @@ public class SecurityConfig {
                         
                         // Endpoints de admin
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-
-                        .requestMatchers("/api/sparql/**").permitAll()  // SPARQL público para demo
                         
                         // Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated()

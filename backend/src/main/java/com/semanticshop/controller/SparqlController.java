@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Locale;
 
 import java.util.*;
 
@@ -183,34 +184,36 @@ public class SparqlController {
      * Obtener productos por rango de precio
      */
     @GetMapping("/analytics/productos-precio-rango")
-    public ResponseEntity<?> getProductosPorRangoPrecio(
-            @RequestParam(defaultValue = "0") double min,
-            @RequestParam(defaultValue = "10000") double max) {
-        
-        String query = String.format(
-            "PREFIX : <http://www.semanticshop.com/ontology#>\n" +
-            "\n" +
-            "SELECT ?producto ?precio\n" +
-            "WHERE {\n" +
-            "  ?producto :precio ?precio .\n" +
-            "  FILTER (?precio >= %f && ?precio <= %f)\n" +
-            "}\n" +
-            "ORDER BY ?precio", min, max);
-        
-        List<Map<String, String>> results = ontologyService.executeSparqlQuery(query);
-        
-        Map<String, Object> response = new HashMap<>();
-        response.put("analysis", "Productos por rango de precio");
-        
-        Map<String, Double> range = new HashMap<>();
-        range.put("min", min);
-        range.put("max", max);
-        response.put("range", range);
-        
-        response.put("results", results);
-        
-        return ResponseEntity.ok(response);
-    }
+public ResponseEntity<?> getProductosPorRangoPrecio(
+        @RequestParam(defaultValue = "0") double min,
+        @RequestParam(defaultValue = "10000") double max) {
+    
+    // ✅ Usar Locale.US para garantizar punto decimal
+    String query = String.format(Locale.US,
+        "PREFIX : <http://www.semanticshop.com/ontology#>\n" +
+        "\n" +
+        "SELECT ?producto ?nombre ?precio\n" +
+        "WHERE {\n" +
+        "  ?producto :precio ?precio .\n" +
+        "  OPTIONAL { ?producto :nombre ?nombre }\n" +
+        "  FILTER (?precio >= %f && ?precio <= %f)\n" +
+        "}\n" +
+        "ORDER BY ?precio", min, max);
+    
+    List<Map<String, String>> results = ontologyService.executeSparqlQuery(query);
+    
+    Map<String, Object> response = new HashMap<>();
+    response.put("analysis", "Productos por rango de precio");
+    
+    Map<String, Double> range = new HashMap<>();
+    range.put("min", min);
+    range.put("max", max);
+    response.put("range", range);
+    
+    response.put("results", results);
+    
+    return ResponseEntity.ok(response);
+}
 
     /**
      * Análisis de compatibilidad
