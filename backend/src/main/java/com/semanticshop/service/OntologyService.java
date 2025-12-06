@@ -29,8 +29,11 @@ import java.util.stream.Collectors;
  * CON SOPORTE PARA CONSULTAS SPARQL
  */
 @Service
-@Slf4j
 public class OntologyService {
+
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(OntologyService.class);
+
+
 
     private final ResourceLoader resourceLoader;
     

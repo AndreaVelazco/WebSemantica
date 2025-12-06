@@ -87,13 +87,4 @@ public class ProductoController {
                 "sonCompatibles", compatibles
         ));
     }
-
-    @GetMapping("/buscar")
-    @Operation(summary = "Buscar productos", 
-               description = "Busca productos por nombre, marca o tipo")
-    public ResponseEntity<List<ProductoDTO>> buscarProductos(@RequestParam String query) {
-        log.info("GET /api/productos/buscar?query={}", query);
-        List<ProductoDTO> resultados = productoService.buscarProductos(query);
-        return ResponseEntity.ok(resultados);
-    }
 }
