@@ -28,8 +28,8 @@ public class BusquedaProductoService {
                 request.getQ(), request.getCategoria(), request.getMarca(), 
                 request.getPrecioMin(), request.getPrecioMax());
 
-        // Obtener todos los productos
-        List<ProductoDTO> todosProductos = productoService.getAllProductos();
+        // Obtener todos los productos (con retry en caso de error del razonador)
+        List<ProductoDTO> todosProductos = obtenerProductosConRetry();
 
         // Aplicar filtros
         List<ProductoDTO> productosFiltrados = aplicarFiltros(todosProductos, request);
@@ -262,10 +262,42 @@ public class BusquedaProductoService {
     }
 
     /**
+     * Obtener productos con retry en caso de error del razonador
+     */
+    private List<ProductoDTO> obtenerProductosConRetry() {
+        int intentos = 0;
+        int maxIntentos = 3;
+        
+        while (intentos < maxIntentos) {
+            try {
+                return productoService.getAllProductos();
+            } catch (Exception e) {
+                intentos++;
+                log.warn("⚠️ Error obteniendo productos (intento {}/{}): {}", 
+                        intentos, maxIntentos, e.getMessage());
+                
+                if (intentos >= maxIntentos) {
+                    log.error("❌ Error después de {} intentos, devolviendo lista vacía", maxIntentos);
+                    return new ArrayList<>();
+                }
+                
+                // Esperar un poco antes de reintentar
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        
+        return new ArrayList<>();
+    }
+
+    /**
      * Obtener todas las categorías disponibles
      */
     public List<String> obtenerCategorias() {
-        return productoService.getAllProductos().stream()
+        return obtenerProductosConRetry().stream()
                 .map(ProductoDTO::getCategoria)
                 .filter(Objects::nonNull)
                 .distinct()
@@ -277,7 +309,7 @@ public class BusquedaProductoService {
      * Obtener todas las marcas disponibles
      */
     public List<String> obtenerMarcas() {
-        return productoService.getAllProductos().stream()
+        return obtenerProductosConRetry().stream()
                 .map(ProductoDTO::getMarca)
                 .filter(Objects::nonNull)
                 .distinct()
@@ -289,7 +321,7 @@ public class BusquedaProductoService {
      * Obtener rango de precios (min y max)
      */
     public Map<String, Double> obtenerRangoPrecios() {
-        List<ProductoDTO> productos = productoService.getAllProductos();
+        List<ProductoDTO> productos = obtenerProductosConRetry();
 
         DoubleSummaryStatistics stats = productos.stream()
                 .map(ProductoDTO::getPrecio)
@@ -314,7 +346,7 @@ public class BusquedaProductoService {
 
         String textoLower = texto.toLowerCase().trim();
 
-        return productoService.getAllProductos().stream()
+        return obtenerProductosConRetry().stream()
                 .map(ProductoDTO::getNombre)
                 .filter(Objects::nonNull)
                 .filter(nombre -> nombre.toLowerCase().contains(textoLower))
