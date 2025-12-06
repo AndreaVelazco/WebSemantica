@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout/Layout';
 import { useCart } from '../context/CartContext';
+import CheckoutModal from '../components/cart/CheckoutModal';
 
 const CartPage = () => {
   const {
@@ -25,6 +26,7 @@ const CartPage = () => {
   const [promoCode, setPromoCode] = React.useState('');
   const [discount, setDiscount] = React.useState(0);
   const [promoApplied, setPromoApplied] = React.useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   const handleApplyPromo = () => {
     // Códigos de descuento de ejemplo
@@ -249,9 +251,17 @@ const CartPage = () => {
                 </div>
 
                 {/* Checkout Button */}
-                <button className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold rounded-xl hover:shadow-lg transition mb-4">
-                  Proceder al Pago
-                </button>
+                <button 
+                onClick={() => setShowCheckout(true)}
+                  className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold rounded-xl hover:shadow-lg transition mb-4">
+                      Proceder al Pago
+                    </button>
+
+{/* Modal de Checkout */}
+<CheckoutModal 
+  isOpen={showCheckout}
+  onClose={() => setShowCheckout(false)}
+/>
 
                 {/* Payment Methods */}
                 <div className="text-center mb-4">

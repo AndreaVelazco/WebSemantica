@@ -11,6 +11,8 @@ import RecommendationsPage from './pages/RecommendationsPage';
 import ProductsPage from './pages/ProductsPage';
 import CategoriesPage from './pages/CategoriesPage';
 import CartPage from './pages/CartPage';
+import OrdersPage from './pages/OrdersPage';
+import OrderDetailPage from './pages/OrderDetailPage';
 
 // Private Route Component
 const PrivateRoute = ({ children }) => {
@@ -67,6 +69,23 @@ function AppRoutes() {
           </PrivateRoute>
         }
       />
+
+      <Route
+  path="/orders"
+  element={
+    <PrivateRoute>
+      <OrdersPage />
+    </PrivateRoute>
+  }
+/>
+<Route
+  path="/orders/:id"
+  element={
+    <PrivateRoute>
+      <OrderDetailPage />
+    </PrivateRoute>
+  }
+/>
 
       {/* Placeholder routes - To be implemented */}
       <Route
