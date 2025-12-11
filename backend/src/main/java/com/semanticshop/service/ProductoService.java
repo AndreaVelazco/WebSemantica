@@ -140,12 +140,15 @@ public class ProductoService {
             dto.setMarca(getShortName(marcas.iterator().next()));
         }
         
-        // Obtener categoría
-        Set<OWLNamedIndividual> categorias = ontologyService
-                .getObjectPropertyValues(id, "perteneceACategoria");
-        if (!categorias.isEmpty()) {
-            dto.setCategoria(getShortName(categorias.iterator().next()));
-        }
+// Obtener categoría
+Set<OWLNamedIndividual> categorias = ontologyService
+        .getObjectPropertyValues(id, "perteneceACategoria");
+if (!categorias.isEmpty()) {
+    dto.setCategoria(getShortName(categorias.iterator().next()));
+} else {
+    // Si no hay categoría explícita, usar el tipo como categoría
+    dto.setCategoria(dto.getTipo());
+}
         
         // Obtener características
         Set<OWLNamedIndividual> caracteristicas = ontologyService
