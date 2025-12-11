@@ -8,23 +8,58 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
     const currentUser = authService.getCurrentUser();
-    if (currentUser) {
-      setUser(currentUser);
+    if (currentUser && currentUser.token) {
+      try {
+        // Cargar perfil completo desde el backend
+        const profile = await authService.getProfile();
+        const completeUser = { ...currentUser, ...profile };
+        setUser(completeUser);
+        localStorage.setItem('user', JSON.stringify(completeUser));
+      } catch (error) {
+        console.error('Error cargando perfil:', error);
+        setUser(currentUser); // Usar datos básicos si falla
+      }
     }
     setLoading(false);
-  }, []);
+  };
 
   const login = async (credentials) => {
     const userData = await authService.login(credentials);
-    setUser(userData);
-    return userData;
+    
+    // Cargar perfil completo después del login
+    try {
+      const profile = await authService.getProfile();
+      const completeUser = { ...userData, ...profile };
+      setUser(completeUser);
+      localStorage.setItem('user', JSON.stringify(completeUser));
+      return completeUser;
+    } catch (error) {
+      console.error('Error cargando perfil completo:', error);
+      setUser(userData);
+      return userData;
+    }
   };
 
   const register = async (userData) => {
     const newUser = await authService.register(userData);
-    setUser(newUser);
-    return newUser;
+    
+    // Cargar perfil completo después del registro
+    try {
+      const profile = await authService.getProfile();
+      const completeUser = { ...newUser, ...profile };
+      setUser(completeUser);
+      localStorage.setItem('user', JSON.stringify(completeUser));
+      return completeUser;
+    } catch (error) {
+      console.error('Error cargando perfil completo:', error);
+      setUser(newUser);
+      return newUser;
+    }
   };
 
   const logout = () => {
@@ -37,12 +72,26 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
+  const refreshProfile = async () => {
+    try {
+      const profile = await authService.getProfile();
+      const completeUser = { ...user, ...profile };
+      setUser(completeUser);
+      localStorage.setItem('user', JSON.stringify(completeUser));
+      return completeUser;
+    } catch (error) {
+      console.error('Error refrescando perfil:', error);
+      throw error;
+    }
+  };
+
   const value = {
     user,
     login,
     register,
     logout,
     updateUser,
+    refreshProfile,
     isAuthenticated: authService.isAuthenticated(),
     loading,
   };
