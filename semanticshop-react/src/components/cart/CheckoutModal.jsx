@@ -12,6 +12,9 @@ const CheckoutModal = ({ isOpen, onClose }) => {
     direccionEnvio: '',
     notas: '',
   });
+  
+  // 🆕 Estado para manejar errores de imagen
+  const [imageErrors, setImageErrors] = useState({});
 
   if (!isOpen) return null;
 
@@ -63,6 +66,29 @@ const CheckoutModal = ({ isOpen, onClose }) => {
     }
   };
 
+  // 🆕 Funciones para manejo de imágenes
+  const handleImageError = (itemId) => {
+    setImageErrors(prev => ({ ...prev, [itemId]: true }));
+  };
+
+  const getImageUrl = (item) => {
+    if (imageErrors[item.id] || !item.imagenUrl) {
+      return getPlaceholderImage(item.tipo);
+    }
+    return item.imagenUrl;
+  };
+
+  const getPlaceholderImage = (tipo) => {
+    const placeholders = {
+      'Smartphone': 'https://via.placeholder.com/80/667eea/ffffff?text=Phone',
+      'Laptop': 'https://via.placeholder.com/80/764ba2/ffffff?text=Laptop',
+      'Tablet': 'https://via.placeholder.com/80/f093fb/ffffff?text=Tablet',
+      'Monitor': 'https://via.placeholder.com/80/4facfe/ffffff?text=Monitor',
+      'Accesorio': 'https://via.placeholder.com/80/00f2fe/ffffff?text=Acc',
+    };
+    return placeholders[tipo] || 'https://via.placeholder.com/80/cccccc/ffffff?text=Prod';
+  };
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Overlay */}
@@ -73,7 +99,7 @@ const CheckoutModal = ({ isOpen, onClose }) => {
 
       {/* Modal */}
       <div className="flex min-h-full items-center justify-center p-4">
-        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-8">
+        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-8 max-h-[90vh] overflow-y-auto">
           {/* Close button */}
           <button
             onClick={onClose}
@@ -94,18 +120,61 @@ const CheckoutModal = ({ isOpen, onClose }) => {
             </p>
           </div>
 
+          {/* 🆕 Lista de productos con imágenes */}
+          <div className="mb-6 bg-slate-50 rounded-xl p-4">
+            <h3 className="font-semibold text-slate-800 mb-4">Productos en tu pedido:</h3>
+            <div className="space-y-3 max-h-64 overflow-y-auto">
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex items-center space-x-4 bg-white p-3 rounded-lg border border-slate-200">
+                  {/* Imagen del producto */}
+                  <div className="w-16 h-16 flex-shrink-0 bg-slate-50 rounded-lg overflow-hidden border border-slate-200">
+                    <img
+                      src={getImageUrl(item)}
+                      alt={item.nombre}
+                      onError={() => handleImageError(item.id)}
+                      className="w-full h-full object-contain p-1"
+                    />
+                  </div>
+
+                  {/* Info del producto */}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-slate-800 text-sm truncate">
+                      {item.nombre}
+                    </h4>
+                    {item.marca && (
+                      <p className="text-xs text-slate-500">{item.marca}</p>
+                    )}
+                    <p className="text-xs text-slate-600 mt-1">
+                      Cantidad: {item.cantidad}
+                    </p>
+                  </div>
+
+                  {/* Precio */}
+                  <div className="text-right">
+                    <p className="font-bold text-slate-800">
+                      S/.{((item.precio || 0) * item.cantidad).toFixed(2)}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      S/.{(item.precio || 0).toFixed(2)} c/u
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Form */}
           <form onSubmit={handleSubmit}>
-            {/* Resumen */}
-            <div className="bg-slate-50 rounded-xl p-4 mb-6">
+            {/* Resumen del total */}
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-4 mb-6 border border-purple-200">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-slate-600">Total a pagar:</span>
+                <span className="text-slate-700 font-semibold">Total a pagar:</span>
                 <span className="text-3xl font-bold text-purple-600">
                   S/.{getTotal().toFixed(2)}
                 </span>
               </div>
-              <p className="text-sm text-slate-500">
-                {cartItems.length} producto{cartItems.length !== 1 ? 's' : ''} en tu carrito
+              <p className="text-sm text-slate-600">
+                {cartItems.length} producto{cartItems.length !== 1 ? 's' : ''} • Envío incluido
               </p>
             </div>
 

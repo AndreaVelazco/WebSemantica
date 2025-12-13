@@ -102,7 +102,7 @@ const ProductsPage = () => {
               
               {searchResults.filtrosAplicados.busqueda && (
                 <span className="px-3 py-1.5 bg-purple-100 text-purple-700 text-sm rounded-full flex items-center space-x-2">
-                  <span>🔍 "{searchResults.filtrosAplicados.busqueda}"</span>
+                  <span> "{searchResults.filtrosAplicados.busqueda}"</span>
                   <button onClick={() => limpiarFiltrosActivos('q')} className="hover:text-purple-900">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -113,7 +113,7 @@ const ProductsPage = () => {
 
               {searchResults.filtrosAplicados.categoria && (
                 <span className="px-3 py-1.5 bg-blue-100 text-blue-700 text-sm rounded-full flex items-center space-x-2">
-                  <span>📂 {searchResults.filtrosAplicados.categoria}</span>
+                  <span> {searchResults.filtrosAplicados.categoria}</span>
                   <button onClick={() => limpiarFiltrosActivos('categoria')} className="hover:text-blue-900">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -124,7 +124,7 @@ const ProductsPage = () => {
 
               {searchResults.filtrosAplicados.marca && (
                 <span className="px-3 py-1.5 bg-green-100 text-green-700 text-sm rounded-full flex items-center space-x-2">
-                  <span>🏷️ {searchResults.filtrosAplicados.marca}</span>
+                  <span>{searchResults.filtrosAplicados.marca}</span>
                   <button onClick={() => limpiarFiltrosActivos('marca')} className="hover:text-green-900">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -136,7 +136,7 @@ const ProductsPage = () => {
               {(searchResults.filtrosAplicados.precioMin || searchResults.filtrosAplicados.precioMax) && (
                 <span className="px-3 py-1.5 bg-amber-100 text-amber-700 text-sm rounded-full flex items-center space-x-2">
                   <span>
-                    💰 S/.{searchResults.filtrosAplicados.precioMin || 0} - S/.{searchResults.filtrosAplicados.precioMax || '∞'}
+                    S/.{searchResults.filtrosAplicados.precioMin || 0} - S/.{searchResults.filtrosAplicados.precioMax || '∞'}
                   </span>
                   <button onClick={() => {
                     limpiarFiltrosActivos('precioMin');

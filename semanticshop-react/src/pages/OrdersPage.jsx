@@ -79,7 +79,7 @@ const OrdersPage = () => {
         {estadisticas && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white">
-              <div className="text-3xl mb-2">📦</div>
+              <div className="text-3xl mb-2"></div>
               <div className="text-3xl font-bold mb-1">
                 {estadisticas.totalPedidos || 0}
               </div>
@@ -87,7 +87,7 @@ const OrdersPage = () => {
             </div>
 
             <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white">
-              <div className="text-3xl mb-2">✅</div>
+              <div className="text-3xl mb-2"></div>
               <div className="text-3xl font-bold mb-1">
                 {estadisticas.pedidosEntregados || 0}
               </div>
@@ -95,7 +95,7 @@ const OrdersPage = () => {
             </div>
 
             <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white">
-              <div className="text-3xl mb-2">🚚</div>
+              <div className="text-3xl mb-2"></div>
               <div className="text-3xl font-bold mb-1">
                 {estadisticas.pedidosEnviados || 0}
               </div>
@@ -103,7 +103,7 @@ const OrdersPage = () => {
             </div>
 
             <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-6 text-white">
-              <div className="text-3xl mb-2">💰</div>
+              <div className="text-3xl mb-2"></div>
               <div className="text-3xl font-bold mb-1">
                 S/.{estadisticas.totalGastado?.toFixed(2) || '0.00'}
               </div>

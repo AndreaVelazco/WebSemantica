@@ -124,6 +124,15 @@ public class ProductoService {
                 .precio(getDoubleProperty(individual, "precio").orElse(0.0))
                 .stock(getIntProperty(individual, "stock").orElse(0))
                 .build();
+
+            // Obtener descripción
+    dto.setDescripcion(getStringProperty(individual, "descripcion")
+            .orElse("Producto de calidad"));
+    
+    // 🆕 AGREGAR ESTAS LÍNEAS
+    dto.setImagenUrl(getStringProperty(individual, "imagenUrl")
+            .orElse("/images/productos/placeholder.jpg"));
+            
         
         // Obtener tipo del producto (clase más específica)
         Set<OWLClass> tipos = ontologyService.getInferredClassesOfIndividual(id);

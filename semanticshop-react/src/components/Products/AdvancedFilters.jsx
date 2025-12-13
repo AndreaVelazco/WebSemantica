@@ -135,7 +135,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                 {/* Búsqueda por texto */}
                 <div className="lg:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    🔍 Buscar productos
+                    Buscar productos
                   </label>
                   <input
                     type="text"
@@ -149,7 +149,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                 {/* Marca */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    🏷️ Marca
+                    Marca
                   </label>
                   <select
                     value={activeFilters.marca || ''}
@@ -171,7 +171,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                 {/* Ordenar por */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    📊 Ordenar por
+                    Ordenar por
                   </label>
                   <select
                     value={activeFilters.ordenarPor || 'nombre'}
@@ -187,7 +187,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                 {/* Precio Mínimo */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    💰 Precio Mínimo
+                    Precio Mínimo
                   </label>
                   <input
                     type="number"
@@ -201,7 +201,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                 {/* Precio Máximo */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    💵 Precio Máximo
+                    Precio Máximo
                   </label>
                   <input
                     type="number"
@@ -215,7 +215,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                 {/* Dirección */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    🔄 Dirección
+                    Dirección
                   </label>
                   <select
                     value={activeFilters.direccion || 'asc'}
@@ -238,7 +238,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
                     className="w-5 h-5 text-purple-600 border-slate-300 rounded focus:ring-2 focus:ring-purple-500"
                   />
                   <span className="text-sm font-semibold text-slate-700">
-                    ✓ Solo productos disponibles en stock
+                    Solo productos disponibles en stock
                   </span>
                 </label>
               </div>
@@ -246,7 +246,7 @@ const AdvancedFilters = ({ onFilterChange, activeFilters }) => {
               {/* Info de rango de precios */}
               <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                 <p className="text-sm text-blue-700">
-                  💡 <strong>Rango de precios disponibles:</strong> S/.{rangoPrecios.precioMin.toFixed(2)} - S/.{rangoPrecios.precioMax.toFixed(2)}
+                 <strong>Rango de precios disponibles:</strong> S/.{rangoPrecios.precioMin.toFixed(2)} - S/.{rangoPrecios.precioMax.toFixed(2)}
                 </p>
               </div>
             </>

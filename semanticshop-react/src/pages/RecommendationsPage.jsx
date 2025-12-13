@@ -27,7 +27,7 @@ const RecommendationsPage = () => {
       return;
     }
 
-    console.log('🔍 Cargando recomendaciones para:', user.clienteIdOntologia);
+    console.log('Cargando recomendaciones para:', user.clienteIdOntologia);
 
     try {
       const data = await recommendationService.getRecommendations(user.clienteIdOntologia);
@@ -52,7 +52,7 @@ const RecommendationsPage = () => {
             Recomendaciones Personalizadas
           </h1>
           <p className="text-slate-600">
-            Productos seleccionados especialmente para ti con inteligencia artificial
+            Productos seleccionados especialmente para ti 
           </p>
         </div>
 
@@ -72,9 +72,6 @@ const RecommendationsPage = () => {
                 <div className="text-sm text-white/80 mb-1">Sistema operativo</div>
                 <div className="text-xl font-bold">{user.sistemaOperativoPreferido || 'No especificado'}</div>
               </div>
-            </div>
-            <div className="mt-4 text-sm text-white/90">
-              💡 <strong>ID de Cliente:</strong> {user.clienteIdOntologia || 'No asignado'}
             </div>
           </div>
         )}
@@ -138,7 +135,6 @@ const RecommendationsPage = () => {
                   <div className="mt-3 flex items-center space-x-4 text-sm text-slate-500">
                     <span>📊 {recommendations.totalRecomendaciones || recommendations.productos.length} productos</span>
                     <span>🎯 Basado en tu perfil</span>
-                    <span>✨ IA Semántica</span>
                   </div>
                 </div>
                 <button

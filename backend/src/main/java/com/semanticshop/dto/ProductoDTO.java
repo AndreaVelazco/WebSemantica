@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Set;
 
+
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,4 +27,5 @@ public class ProductoDTO {
     private Set<String> productosCompatibles;
     private Set<String> productosIncompatibles;
     private boolean disponible;  // ← AGREGAR ESTE CAMPO
+    private String imagenUrl;
 }

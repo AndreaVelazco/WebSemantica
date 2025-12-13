@@ -27,6 +27,9 @@ const CartPage = () => {
   const [discount, setDiscount] = React.useState(0);
   const [promoApplied, setPromoApplied] = React.useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
+  
+  // 🆕 Estado para manejar errores de imagen
+  const [imageErrors, setImageErrors] = useState({});
 
   const handleApplyPromo = () => {
     // Códigos de descuento de ejemplo
@@ -46,6 +49,29 @@ const CartPage = () => {
       setDiscount(0);
       setPromoApplied(false);
     }
+  };
+
+  // 🆕 Funciones para manejo de imágenes
+  const handleImageError = (itemId) => {
+    setImageErrors(prev => ({ ...prev, [itemId]: true }));
+  };
+
+  const getImageUrl = (item) => {
+    if (imageErrors[item.id] || !item.imagenUrl) {
+      return getPlaceholderImage(item.tipo);
+    }
+    return item.imagenUrl;
+  };
+
+  const getPlaceholderImage = (tipo) => {
+    const placeholders = {
+      'Smartphone': 'https://via.placeholder.com/150/667eea/ffffff?text=Smartphone',
+      'Laptop': 'https://via.placeholder.com/150/764ba2/ffffff?text=Laptop',
+      'Tablet': 'https://via.placeholder.com/150/f093fb/ffffff?text=Tablet',
+      'Monitor': 'https://via.placeholder.com/150/4facfe/ffffff?text=Monitor',
+      'Accesorio': 'https://via.placeholder.com/150/00f2fe/ffffff?text=Accesorio',
+    };
+    return placeholders[tipo] || 'https://via.placeholder.com/150/cccccc/ffffff?text=Producto';
   };
 
   const finalTotal = total - discount;
@@ -105,19 +131,14 @@ const CartPage = () => {
               {cartItems.map((item) => (
                 <div key={item.id} className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-md transition">
                   <div className="flex items-center space-x-6">
-                    {/* Image */}
-                    <div className="w-24 h-24 bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl flex items-center justify-center text-4xl flex-shrink-0">
-                      {item.imagen ? (
-                        <img src={item.imagen} alt={item.nombre} className="w-full h-full object-cover rounded-xl" />
-                      ) : (
-                        <span>
-                          {item.tipo === 'Smartphone'}
-                          {item.tipo === 'Laptop' }
-                          {item.tipo === 'Tablet'}
-                          {item.tipo === 'Accesorio'}
-                          {!['Smartphone', 'Laptop', 'Tablet', 'Accesorio'].includes(item.tipo)}
-                        </span>
-                      )}
+                    {/* 🆕 Image con manejo de errores */}
+                    <div className="w-24 h-24 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden border border-slate-200">
+                      <img 
+                        src={getImageUrl(item)} 
+                        alt={item.nombre}
+                        onError={() => handleImageError(item.id)}
+                        className="w-full h-full object-contain p-2"
+                      />
                     </div>
 
                     {/* Details */}
@@ -128,9 +149,14 @@ const CartPage = () => {
                         <p className="text-xs text-green-600 font-semibold">
                           ✓ En stock
                         </p>
-                        {item.sistemaOperativo && (
+                        {item.categoria && (
+                          <span className="px-2 py-1 bg-purple-50 text-purple-600 text-xs rounded">
+                            {item.categoria}
+                          </span>
+                        )}
+                        {item.tipo && (
                           <span className="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded">
-                            {item.sistemaOperativo}
+                            {item.tipo}
                           </span>
                         )}
                       </div>
@@ -220,7 +246,7 @@ const CartPage = () => {
                       {shipping === 0 ? (
                         <span className="text-green-600">GRATIS</span>
                       ) : (
-                        `$${shipping.toFixed(2)}`
+                        `S/.${shipping.toFixed(2)}`
                       )}
                     </span>
                   </div>
@@ -252,16 +278,17 @@ const CartPage = () => {
 
                 {/* Checkout Button */}
                 <button 
-                onClick={() => setShowCheckout(true)}
-                  className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold rounded-xl hover:shadow-lg transition mb-4">
-                      Proceder al Pago
-                    </button>
+                  onClick={() => setShowCheckout(true)}
+                  className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold rounded-xl hover:shadow-lg transition mb-4"
+                >
+                  Proceder al Pago
+                </button>
 
-{/* Modal de Checkout */}
-<CheckoutModal 
-  isOpen={showCheckout}
-  onClose={() => setShowCheckout(false)}
-/>
+                {/* Modal de Checkout */}
+                <CheckoutModal 
+                  isOpen={showCheckout}
+                  onClose={() => setShowCheckout(false)}
+                />
 
                 {/* Payment Methods */}
                 <div className="text-center mb-4">

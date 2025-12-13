@@ -19,18 +19,15 @@ const Header = () => {
         {/* Logo */}
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">SB</span>
+            <span className="text-white font-bold text-lg">TB</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold gradient-text">SmartBuy</h1>
+            <h1 className="text-xl font-bold gradient-text">Tech Boutique</h1>
             <p className="text-xs text-slate-500">E-commerce Inteligente</p>
           </div>
         </div>
 
-        {/* Search Bar - Centro */}
-        <div className="hidden md:flex flex-1 max-w-xl mx-8">
-          <SearchBar />
-        </div>
+  
 
         {/* User Menu */}
         <div className="flex items-center space-x-4">
@@ -102,25 +99,6 @@ const Header = () => {
               </div>
             )}
           </div>
-        </div>
-      </div>
-
-      {/* Search Bar Mobile */}
-      <div className="md:hidden px-4 pb-4">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Buscar productos..."
-            className="w-full px-4 py-2.5 pl-10 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-          <svg 
-            className="w-5 h-5 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
         </div>
       </div>
     </header>
